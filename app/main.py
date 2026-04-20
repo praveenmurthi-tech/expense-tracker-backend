@@ -10,17 +10,11 @@ app = FastAPI(title="Expense Tracker API")
 # =========================
 # CORS CONFIGURATION
 # =========================
-origins = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "http://127.0.0.1:8081",
-    # 👉 Add your frontend domain later
-    # "https://your-frontend.vercel.app"
-]
+oallowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,   # use ["*"] only for testing
+    allow_origins=allowed_origins if allowed_origins != ["*"] else ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
