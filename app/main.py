@@ -4,13 +4,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1 import expenses
 from app.db.session import engine
 from app.db.base import init_db
+import os
 
 app = FastAPI(title="Expense Tracker API")
 
 # =========================
 # CORS CONFIGURATION
 # =========================
-oallowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 
 app.add_middleware(
     CORSMiddleware,
