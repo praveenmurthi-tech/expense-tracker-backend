@@ -1,24 +1,33 @@
 from datetime import date, datetime
-from decimal import Decimal
 from typing import Optional
 
 from sqlmodel import SQLModel
 
 
+# ----------------------------
+# CREATE EXPENSE SCHEMA
+# ----------------------------
 class ExpenseCreate(SQLModel):
-    amount: Decimal
+    amount: float
     category: str
     description: Optional[str] = None
     date: date
 
-    # optional but useful for retry safety
-    idempotency_key: Optional[str] = None
+    # required for retry safety (VERY IMPORTANT)
+    idempotency_key: str
 
 
+# ----------------------------
+# READ EXPENSE SCHEMA
+# ----------------------------
 class ExpenseRead(SQLModel):
     id: int
-    amount: Decimal
+    amount: float
     category: str
     description: Optional[str]
     date: date
     created_at: datetime
+    idempotency_key: str
+
+    class Config:
+        from_attributes = True
