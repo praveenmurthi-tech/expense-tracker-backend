@@ -13,6 +13,7 @@ app = FastAPI(title="Expense Tracker API")
 origins = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "http://127.0.0.1:8081",
     # 👉 Add your frontend domain later
     # "https://your-frontend.vercel.app"
 ]
